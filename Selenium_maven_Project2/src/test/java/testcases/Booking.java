@@ -2,9 +2,11 @@ package testcases;
 
 import java.time.Duration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,9 +45,26 @@ public class Booking {
 		new Actions(driver).moveToElement(search_location).perform();
 		WebElement location=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"modal-root\"]/div/div/div/div[1]/div[2]/div/ul/li[1]")));
 		location.click();
-		
 		WebElement movies=driver.findElement(By.xpath("//*[@id=\"super-container\"]/div[2]/header/div[2]/div/div/div/div[1]/div/a[1]"));
+		String href=movies.getAttribute("href");
+		System.out.println(href);
 		movies.click();
+		driver.get(href);
+		
+		
+		WebElement movies_div=driver.findElement(By.xpath("//*[@id=\"super-container\"]/div[2]/div[4]/div[2]"));
+		
+		//return all movies in the city 
+		List<WebElement> movies_img = movies_div.findElements(By.tagName("img"));
+		for(WebElement e : movies_img) {
+			System.out.println(e.getAttribute("alt"));
+			}
+		
+		
+//		WebElement events=driver.findElement(By.xpath("//*[@id=\"super-container\"]/div[2]/div[2]/header/div[2]/div/div/div/div[1]/div/a[3]"));
+//		events.click();
+		
+		
 	}
 
 }
